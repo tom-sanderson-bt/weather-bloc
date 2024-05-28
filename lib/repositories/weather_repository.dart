@@ -12,7 +12,10 @@ class WeatherRepository {
     try {
       final location = await weatherService.getLocation(city);
       final weather = await weatherService.getWeather(location);
-      return weather;
+      return weather.copyWith(
+        name: location.name,
+        country: location.country,
+      );
     } on WeatherException catch (e) {
       throw CustomError(errorMsg: e.message);
     } catch (e) {
