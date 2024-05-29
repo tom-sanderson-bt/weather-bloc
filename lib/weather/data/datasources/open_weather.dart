@@ -2,17 +2,18 @@ import 'dart:convert';
 
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
-import 'package:open_weather_bloc/constants/constants.dart';
-import 'package:open_weather_bloc/exceptions/weather_exception.dart';
-import 'package:open_weather_bloc/models/location.dart';
-import 'package:open_weather_bloc/models/weather.dart';
+import 'package:open_weather_bloc/core/constants/constants.dart';
+import 'package:open_weather_bloc/core/exceptions/weather_exception.dart';
 
-class OpenWeatherService {
+import '../models/location.dart';
+import '../models/weather.dart';
+
+class OpenWeatherDataSource {
   final http.Client httpClient;
 
   OpenWeatherService({required this.httpClient});
 
-  Future<Location> getLocation(String city) async {
+  Future<LocationModel> getLocation(String city) async {
     final Uri uri = Uri(
         scheme: 'https',
         host: kApiHost,
@@ -32,13 +33,13 @@ class OpenWeatherService {
       if (responseBody.isEmpty) {
         throw WeatherException(message: 'Cannot get the location of $city');
       }
-      return Location.fromJson(responseBody);
+      return LocationModel.fromJson(responseBody);
     } catch (e) {
       throw WeatherException(message: e.toString());
     }
   }
 
-  Future<Weather> getWeather(Location location) async {
+  Future<WeatherModel> getWeather(LocationModel location) async {
     final Uri uri = Uri(
         scheme: 'https',
         host: kApiHost,
@@ -59,7 +60,7 @@ class OpenWeatherService {
 
       final responseBody = json.decode(response.body);
 
-      return Weather.fromJson(responseBody);
+      return WeatherModel.fromJson(responseBody);
     } catch (e) {
       throw WeatherException(message: e.toString());
     }

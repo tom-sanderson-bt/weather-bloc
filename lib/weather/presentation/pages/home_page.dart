@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:open_weather_bloc/constants/constants.dart';
-import 'package:open_weather_bloc/cubits/settings/settings_cubit.dart';
-import 'package:open_weather_bloc/cubits/weather/weather_cubit.dart';
-import 'package:open_weather_bloc/pages/search_page.dart';
-import 'package:open_weather_bloc/pages/settings_page.dart';
-import 'package:open_weather_bloc/widgets/error_dialogue.dart';
+import 'package:open_weather_bloc/core/constants/constants.dart';
+import 'package:open_weather_bloc/weather/presentation/cubits/settings/settings_cubit.dart';
+import 'package:open_weather_bloc/weather/presentation/cubits/weather/weather_cubit.dart';
+import 'package:open_weather_bloc/weather/presentation/pages/search_page.dart';
+import 'package:open_weather_bloc/weather/presentation/pages/settings_page.dart';
+import 'package:open_weather_bloc/weather/presentation/widgets/error_dialogue.dart';
 import 'package:recase/recase.dart';
 import 'package:intl/intl.dart';
 
@@ -48,9 +48,9 @@ class _HomePageState extends State<HomePage> {
   Widget showWeather() {
     return BlocConsumer<WeatherCubit, WeatherState>(
       listener: (context, state) {
-        print("${state.status} ${state.error}");
+        print("${state.status} ${state.failure}");
         if (state.status == WeatherStatus.error) {
-          return errorDialogue(context, state.error.errorMsg);
+          return errorDialogue(context, state.failure.message);
         }
       },
       builder: (context, state) {

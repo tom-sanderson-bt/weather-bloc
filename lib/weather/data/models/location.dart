@@ -1,12 +1,12 @@
 import 'package:equatable/equatable.dart';
 
-class Location extends Equatable {
+class LocationModel extends Equatable {
   final String name;
   final double lat;
   final double lon;
   final String country;
 
-  const Location({
+  const LocationModel({
     required this.name,
     required this.lat,
     required this.lon,
@@ -15,19 +15,19 @@ class Location extends Equatable {
 
   @override
   String toString() {
-    return 'Location(name: $name, lat: $lat, lon: $lon, country: $country)';
+    return 'LocationModel(name: $name, lat: $lat, lon: $lon, country: $country)';
   }
 
   @override
   List<Object> get props => [name, lat, lon, country];
 
-  Location copyWith({
+  LocationModel copyWith({
     String? name,
     double? lat,
     double? lon,
     String? country,
   }) {
-    return Location(
+    return LocationModel(
       name: name ?? this.name,
       lat: lat ?? this.lat,
       lon: lon ?? this.lon,
@@ -35,9 +35,9 @@ class Location extends Equatable {
     );
   }
 
-  factory Location.fromJson(dynamic json) {
+  factory LocationModel.fromJson(dynamic json) {
     final data = json[0];
-    return Location(
+    return LocationModel(
       name: data['name'] ?? '',
       lat: data['lat']?.toDouble() ?? 0.0,
       lon: data['lon']?.toDouble() ?? 0.0,

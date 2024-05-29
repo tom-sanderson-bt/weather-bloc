@@ -2,12 +2,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:open_weather_bloc/cubits/settings/settings_cubit.dart';
-import 'package:open_weather_bloc/cubits/theme/theme_cubit.dart';
-import 'package:open_weather_bloc/cubits/weather/weather_cubit.dart';
-import 'package:open_weather_bloc/pages/home_page.dart';
-import 'package:open_weather_bloc/repositories/weather_repository.dart';
-import 'package:open_weather_bloc/services/open_weather.dart';
+import 'package:open_weather_bloc/weather/presentation/cubits/settings/settings_cubit.dart';
+import 'package:open_weather_bloc/weather/presentation/cubits/theme/theme_cubit.dart';
+import 'package:open_weather_bloc/weather/presentation/cubits/weather/weather_cubit.dart';
+import 'package:open_weather_bloc/weather/presentation/pages/home_page.dart';
+import 'package:open_weather_bloc/weather/data/services/open_weather.dart';
 
 void main() async {
   await dotenv.load(fileName: '.env');
