@@ -11,7 +11,7 @@ import '../models/weather.dart';
 class OpenWeatherDataSource {
   final http.Client httpClient;
 
-  OpenWeatherService({required this.httpClient});
+  OpenWeatherDataSource({required this.httpClient});
 
   Future<LocationModel> getLocation(String city) async {
     final Uri uri = Uri(

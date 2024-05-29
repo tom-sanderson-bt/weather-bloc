@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:open_weather_bloc/core/constants/constants.dart';
+import 'package:open_weather_bloc/core/services/injection.dart';
+import 'package:open_weather_bloc/weather/domain/usecases/update_theme_on_weather.dart';
 import 'package:open_weather_bloc/weather/presentation/cubits/settings/settings_cubit.dart';
 import 'package:open_weather_bloc/weather/presentation/cubits/weather/weather_cubit.dart';
 import 'package:open_weather_bloc/weather/presentation/pages/search_page.dart';
 import 'package:open_weather_bloc/weather/presentation/pages/settings_page.dart';
-import 'package:open_weather_bloc/weather/presentation/widgets/error_dialogue.dart';
+import 'package:open_weather_bloc/core/widgets/error_dialogue.dart';
 import 'package:recase/recase.dart';
 import 'package:intl/intl.dart';
 
@@ -17,9 +19,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  late final UpdateThemeOnWeatherUseCase _updateThemeOnWeather;
+
   @override
   void initState() {
     super.initState();
+    _updateThemeOnWeather = sl<UpdateThemeOnWeatherUseCase>();
+    _updateThemeOnWeather();
   }
 
   Widget showIcon(String icon) {

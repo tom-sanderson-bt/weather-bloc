@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:open_weather_bloc/cubits/settings/settings_cubit.dart';
+import 'package:open_weather_bloc/weather/presentation/cubits/settings/settings_cubit.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
