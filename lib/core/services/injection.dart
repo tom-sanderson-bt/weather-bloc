@@ -12,29 +12,24 @@ import 'package:open_weather_bloc/weather/presentation/cubits/weather/weather_cu
 final sl = GetIt.instance;
 
 Future<void> initDI() async {
-  sl
-    ..registerLazySingleton<Client>(
-      () => Client(),
-    )
-    ..registerLazySingleton<OpenWeatherDataSource>(
-      () => OpenWeatherDataSource(httpClient: sl()),
-    )
-    ..registerLazySingleton<GetWeatherUseCase>(
-      () => GetWeatherUseCase(repository: sl()),
-    )
-    ..registerLazySingleton<WeatherCubit>(
-      () => WeatherCubit(getWeatherUseCase: sl()),
-    )
-    ..registerLazySingleton<ThemeCubit>(
-      () => ThemeCubit(),
-    )
-    ..registerLazySingleton<SettingsCubit>(
-      () => SettingsCubit(),
-    )
-    ..registerLazySingleton<UpdateThemeOnWeatherUseCase>(
-      () => UpdateThemeOnWeatherUseCase(themeCubit: sl(), weatherCubit: sl()),
-    )
-    ..registerLazySingleton<WeatherRepository>(
-      () => OpenWeatherRepository(openWeatherDataSource: sl()),
-    );
+  // Data sources
+  sl.registerLazySingleton<Client>(() => Client());
+  sl.registerLazySingleton<OpenWeatherDataSource>(
+      () => OpenWeatherDataSource(httpClient: sl()));
+
+  // Repositories
+  sl.registerLazySingleton<WeatherRepository>(
+      () => OpenWeatherRepository(openWeatherDataSource: sl()));
+
+  // Use cases
+  sl.registerLazySingleton<GetWeatherUseCase>(
+      () => GetWeatherUseCase(repository: sl()));
+  sl.registerLazySingleton<UpdateThemeOnWeatherUseCase>(
+      () => UpdateThemeOnWeatherUseCase(themeCubit: sl(), weatherCubit: sl()));
+
+  // Cubits
+  sl.registerLazySingleton<WeatherCubit>(
+      () => WeatherCubit(getWeatherUseCase: sl()));
+  sl.registerLazySingleton<ThemeCubit>(() => ThemeCubit());
+  sl.registerLazySingleton<SettingsCubit>(() => SettingsCubit());
 }

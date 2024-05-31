@@ -15,14 +15,15 @@ class OpenWeatherDataSource {
 
   Future<LocationModel> getLocation(String city) async {
     final Uri uri = Uri(
-        scheme: 'https',
-        host: kApiHost,
-        path: '/geo/1.0/direct',
-        queryParameters: {
-          'q': city,
-          'limit': kLimit,
-          'appid': dotenv.env['OPEN_WEATHER_KEY']
-        });
+      scheme: 'https',
+      host: kApiHost,
+      path: '/geo/1.0/direct',
+      queryParameters: {
+        'q': city,
+        'limit': kLimit,
+        'appid': dotenv.env['OPEN_WEATHER_KEY']
+      },
+    );
     try {
       final http.Response response = await http.get(uri);
 
@@ -41,15 +42,16 @@ class OpenWeatherDataSource {
 
   Future<WeatherModel> getWeather(LocationModel location) async {
     final Uri uri = Uri(
-        scheme: 'https',
-        host: kApiHost,
-        path: '/data/2.5/weather',
-        queryParameters: {
-          'lat': "${location.lat}",
-          'lon': "${location.lon}",
-          'units': kMetric,
-          'appid': dotenv.env['OPEN_WEATHER_KEY']
-        });
+      scheme: 'https',
+      host: kApiHost,
+      path: '/data/2.5/weather',
+      queryParameters: {
+        'lat': "${location.lat}",
+        'lon': "${location.lon}",
+        'units': kMetric,
+        'appid': dotenv.env['OPEN_WEATHER_KEY']
+      },
+    );
 
     try {
       final http.Response response = await http.get(uri);
